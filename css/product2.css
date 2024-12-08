@@ -1,0 +1,191 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f6;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #2c2c2c;
+    color: #fff;
+}
+
+header a.logo {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+main {
+    padding: 20px;
+}
+
+.product-detail {
+    display: flex;
+    gap: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-section img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.info-section {
+    flex: 1;
+}
+
+.info-section h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 20px;
+    color: #e60000;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin-bottom: 10px;
+    color: #ffcc00;
+}
+
+.description {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.specs {
+    margin-bottom: 15px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.specs li {
+    margin-bottom: 5px;
+}
+
+.add-to-cart {
+    padding: 10px 20px;
+    background: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background: #555;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    background: #2c2c2c;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Адаптивность */
+
+/* Для экранов до 768px */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+
+    .product-detail {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+
+    .info-section h1 {
+        font-size: 22px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .rating {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .specs li {
+        font-size: 14px;
+    }
+
+    .add-to-cart {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Для экранов до 480px */
+@media (max-width: 480px) {
+    .product-detail {
+        padding: 10px;
+    }
+
+    .info-section h1 {
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .rating {
+        font-size: 14px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .specs li {
+        font-size: 12px;
+    }
+
+    .add-to-cart {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 10px;
+    }
+}

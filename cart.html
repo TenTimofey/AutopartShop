@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">AutoParts</a>
+        <nav>
+            <a href="profile.html">Мой профиль</a>
+            <a href="catalog.html">Каталог</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Корзина</h1>
+        <div class="cart">
+            <p>Ваша корзина пуста!</p>
+        </div>
+        <div class="summary">
+            <p>Итого: <span id="total-price">0 ₽</span></p>
+            <button class="checkout">Оформить заказ</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 AutoParts</p>
+        <p>Контакты: +7 123 456-78-90 | support@autoparts.com</p>
+        <p>Адрес: пр. Мира, д. 10, Москва</p>
+    </footer>
+
+    
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function renderCart() {
+    const cartContainer = document.querySelector('.cart');
+    const totalPriceElement = document.getElementById('total-price');
+    cartContainer.innerHTML = '';
+    let totalPrice = 0;
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Ваша корзина пуста!</p>';
+        totalPriceElement.textContent = `0 ₽`;
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        cartContainer.innerHTML += `
+            <div class="cart-item" data-id="${item.id}">
+                <img src="${item.img}" alt="${item.name}">
+                <div class="details">
+                    <p>${item.name}</p>
+                    <p>${item.price} ₽ x ${item.quantity}</p>
+                </div>
+                <p>${itemTotal} ₽</p>
+                <button class="remove-item" data-index="${index}">Удалить</button>
+            </div>
+        `;
+        totalPrice += itemTotal; // Добавляем к общей сумме
+    });
+
+    // Устанавливаем итоговую сумму
+    totalPriceElement.textContent = `${totalPrice} ₽`;
+}
+
+document.querySelector('.cart').addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-item')) {
+        const index = e.target.getAttribute('data-index');
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+    }
+});
+
+document.querySelector('.checkout').addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert('Ваша корзина пуста. Добавьте товары, чтобы оформить заказ.');
+        return;
+    }
+
+    localStorage.removeItem('cart');
+    alert('Спасибо за ваш заказ! Мы свяжемся с вами для подтверждения.');
+    renderCart();
+});
+
+renderCart();
+    </script>
+</body>
+</html>

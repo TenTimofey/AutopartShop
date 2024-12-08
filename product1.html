@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали товара</title>
+    <link rel="stylesheet" href="css/product1.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">AutoParts</a>
+        <nav>
+            <a href="profile.html">Мой профиль</a>
+            <a href="cart.html">Корзина</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-detail">
+            <div class="image-section">
+                <img src="https://www.toyotaspares.ru/upload/cards/65ae89aed5201.jpg" alt="Фильтр масляный">
+            </div>
+            <div class="info-section">
+                <h1>Фильтр масляный</h1>
+                <p class="price">5000 ₽</p>
+                <p class="rating">★ 4.5</p>
+                <p class="description">
+                    Масляный фильтр высокого качества. Гарантирует чистоту масла, что увеличивает срок службы двигателя.
+                </p>
+                <ul class="specs">
+                    <li>Производитель: Toyota</li>
+                    <li>Совместимость: Toyota</li>
+                    <li>Артикул: 12345</li>
+                </ul>
+                <button class="add-to-cart" data-id="1">Добавить в корзину</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 AutoParts</p>
+        <p>Контакты: +7 123 456-78-90 | support@autoparts.com</p>
+        <p>Адрес: пр. Мира, д. 10, Москва</p>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+
+const product = products.find(p => p.id == productId);
+
+if (product) {
+    document.querySelector('.info-section h1').textContent = product.name;
+    document.querySelector('.info-section .price').textContent = `${product.price} ₽`;
+    document.querySelector('.info-section .description').textContent = `Описание для ${product.name}`;
+    document.querySelector('.image-section img').src = product.img;
+}
+
+    </script>
+</body>
+</html>

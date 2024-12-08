@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин автозапчастей</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <div class="logo">AutoParts</div>
+            <nav>
+                <a href="catalog.html">Каталог</a>
+                <a href="cart.html">Корзина</a>
+                <a href="profile.html">Мой профиль</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="slider">
+                <div class="slide" style="background-image: url('https://topdetal.ru/upload/medialibrary/4f7/4f7f75c3c04a1f9be02b36fd9d5ff32b.jpg')">
+                    <h2>Скидка 30% на тормозные колодки</h2>
+                </div>
+                <div class="slide" style="background-image: url('https://autogarantcity.ru/upload/iblock/670/6700f4bd4a0f1320b35218be41e98637.jpg')">
+                    <h2>Новинки для двигателя</h2>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </section>
+
+            <section class="categories">
+                <h2>Каталог</h2>
+                <button onclick="location.href='catalog.html'" class="catalog-button">Перейти в каталог</button>
+            </section>
+
+            <section class="new-arrivals">
+                <h2>Новинки</h2>
+                <div id="product-list"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 AutoParts</p>
+            <p>Контакты: +7 123 456-78-90 | support@autoparts.com</p>
+            <p>Адрес: пр. Мира, д. 10, Москва</p>
+        </footer>
+    </div>
+
+    <script>
+        // Слайдер
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlide(slideIndex);
+        });
+
+        showSlide(slideIndex);
+
+        // Новинки (товары из каталога)
+        const products = [
+            { id: 1, name: 'Фильтр масляный', image: 'https://www.toyotaspares.ru/upload/cards/65ae89aed5201.jpg', link: 'product1.html', description: 'Качественный фильтр для вашего автомобиля.' },
+            { id: 2, name: 'Тормозные колодки', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQoBo5Smy1i7vcFsFgxiXsCBlYdz_t5AH3LQ&s', link: 'product2.html', description: 'Надежные тормозные колодки, увеличивающие безопасность.' },
+            { id: 3, name: 'Моторное масло', image: 'https://www.std-shell.ru/upload/iblock/9b3/9b3298ae2e7488ed15c06904f1f90181.jpg', link: 'product3.html', description: 'Высококачественное масло для двигателя.' },
+        ];
+
+        const productList = document.getElementById('product-list');
+        products.forEach(product => {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.innerHTML = `
+                <a href="${product.link}">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                </a>
+            `;
+            productList.appendChild(productItem);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой профиль</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">AutoParts</a>
+        <nav>
+            <a href="catalog.html">Каталог</a>
+            <a href="cart.html">Корзина</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile">
+            <h1>Мой профиль</h1>
+            <div class="profile-info">
+                <button id="login-btn">Войти</button>
+            </div>
+        </section>
+        
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Вход/Регистрация</h2>
+                <form id="login-form">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Введите ваш email" required>
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" placeholder="Введите ваш пароль" required>
+                    <button type="submit">Войти</button>
+                </form>
+                <p class="register-link">Нет аккаунта? <a href="#">Зарегистрируйтесь</a></p>
+            </div>
+        </div>
+
+        <section class="orders">
+            <h2>Мои заказы</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>№ заказа</th>
+                        <th>Дата</th>
+                        <th>Товар</th>
+                        <th>Сумма</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12345</td>
+                        <td>2024-12-01</td>
+                        <td>Фильтр масляный</td>
+                        <td>500 ₽</td>
+                        <td>Доставлен</td>
+                    </tr>
+                    <tr>
+                        <td>12346</td>
+                        <td>2024-11-28</td>
+                        <td>Тормозной диск</td>
+                        <td>1200 ₽</td>
+                        <td>В обработке</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 AutoParts</p>
+        <p>Контакты: +7 123 456-78-90 | support@autoparts.com</p>
+        <p>Адрес: пр. Мира, д. 10, Москва</p>
+    </footer>
+    
+    <script>
+        const profileData = {
+        name: localStorage.getItem('name') || 'Иван Иванов',
+        email: localStorage.getItem('email') || 'ivan@example.com',
+        phone: localStorage.getItem('phone') || '+7 900 123-45-67',
+};
+const loginBtn = document.getElementById('login-btn');
+const modal = document.getElementById('login-modal');
+const closeBtn = document.querySelector('.close');
+
+loginBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+        const nameElem = document.getElementById('name');
+        const emailElem = document.getElementById('email');
+        const phoneElem = document.getElementById('phone');
+
+        nameElem.textContent = profileData.name;
+        emailElem.textContent = profileData.email;
+        phoneElem.textContent = profileData.phone;
+
+        document.getElementById('edit-profile').addEventListener('click', () => {
+            const newName = prompt('Введите имя:', profileData.name);
+            const newEmail = prompt('Введите email:', profileData.email);
+            const newPhone = prompt('Введите номер телефона:', profileData.phone);
+
+            if (newName && newEmail && newPhone) {
+                profileData.name = newName;
+                profileData.email = newEmail;
+                profileData.phone = newPhone;
+
+                localStorage.setItem('name', newName);
+                localStorage.setItem('email', newEmail);
+                localStorage.setItem('phone', newPhone);
+
+                nameElem.textContent = newName;
+                emailElem.textContent = newEmail;
+                phoneElem.textContent = newPhone;
+
+                alert('Профиль успешно обновлен!');
+            } else {
+                alert('Все поля обязательны для заполнения!');
+            }
+        });     
+    </script>
+</body>
+</html>

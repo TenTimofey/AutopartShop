@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="css/catalog.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">AutoParts</a>
+        <nav>
+            <a href="profile.html">Мой профиль</a>
+            <a href="cart.html">Корзина</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Каталог</h1>
+        <div class="catalog-container">
+            <aside class="filters">
+                <div class="filter-section">
+                    <label for="car-brand">Марка автомобиля:</label>
+                    <select id="car-brand" name="car-brand">
+                        <option value="all">Все марки</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="bmw">BMW</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <label for="category">Категория:</label>
+                    <select id="category">
+                        <option value="all">Все</option>
+                        <option value="engine">Двигатель</option>
+                        <option value="brakes">Тормоза</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <label for="sort">Сортировка:</label>
+                    <select id="sort">
+                        <option value="popular">По популярности</option>
+                        <option value="price-asc">Цена: по возрастанию</option>
+                        <option value="price-desc">Цена: по убыванию</option>
+                    </select>
+                </div>
+            </aside>
+            <div class="catalog">
+                <!-- Карточки товаров будут подгружены динамически через JS -->
+            </div>
+        </div>
+        <div class="no-more-products">
+            <p>К сожалению, больше товаров нет.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 AutoParts</p>
+        <p>Контакты: +7 123 456-78-90 | support@autoparts.com</p>
+        <p>Адрес: пр. Мира, д. 10, Москва</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "Фильтр масляный Toyota", brand: "toyota", price: 5000, category: "engine", img: "https://www.toyotaspares.ru/upload/cards/65ae89aed5201.jpg", page: "product1.html" },
+            { id: 2, name: "Тормозные колодки Mercedes", brand: "mercedes", price: 12000, category: "brakes", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQoBo5Smy1i7vcFsFgxiXsCBlYdz_t5AH3LQ&s", page: "product2.html" },
+            { id: 3, name: "Масло моторное Shell", brand: "all", price: 1800, category: "engine", img: "https://www.std-shell.ru/upload/iblock/9b3/9b3298ae2e7488ed15c06904f1f90181.jpg", page: "product3.html" },
+        ];
+
+        function renderProducts(filterBrand = "all", filterCategory = "all", sortOption = "popular") {
+            const catalog = document.querySelector('.catalog');
+            catalog.innerHTML = '';
+
+            let filteredProducts = products;
+
+            if (filterBrand !== "all") {
+                filteredProducts = filteredProducts.filter(product => product.brand === filterBrand);
+            }
+
+            if (filterCategory !== "all") {
+                filteredProducts = filteredProducts.filter(product => product.category === filterCategory);
+            }
+
+            if (sortOption === "price-asc") {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (sortOption === "price-desc") {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            }
+
+            filteredProducts.forEach(product => {
+                catalog.innerHTML += `
+                    <div class="product">
+                        <div class="product-image" onclick="redirectToProduct('${product.page}')">
+                            <img src="${product.img}" alt="${product.name}">
+                        </div>
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price} ₽</p>
+                        <button onclick="addToCart(${product.id})">Купить</button>
+                    </div>
+                `;
+            });
+        }
+
+        function redirectToProduct(productPage) {
+            window.location.href = productPage;
+        }
+
+        function addToCart(productId) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${product.name} добавлен в корзину!`);
+            }
+        }
+
+        document.getElementById('car-brand').addEventListener('change', () => {
+            const selectedBrand = document.getElementById('car-brand').value;
+            const selectedCategory = document.getElementById('category').value;
+            const selectedSort = document.getElementById('sort').value;
+            renderProducts(selectedBrand, selectedCategory, selectedSort);
+        });
+
+        document.getElementById('category').addEventListener('change', () => {
+            const selectedBrand = document.getElementById('car-brand').value;
+            const selectedCategory = document.getElementById('category').value;
+            const selectedSort = document.getElementById('sort').value;
+            renderProducts(selectedBrand, selectedCategory, selectedSort);
+        });
+
+        document.getElementById('sort').addEventListener('change', () => {
+            const selectedBrand = document.getElementById('car-brand').value;
+            const selectedCategory = document.getElementById('category').value;
+            const selectedSort = document.getElementById('sort').value;
+            renderProducts(selectedBrand, selectedCategory, selectedSort);
+        });
+
+        renderProducts();
+    </script>
+</body>
+</html>

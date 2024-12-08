@@ -1,0 +1,175 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f6;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #2c2c2c;
+    color: #fff;
+}
+
+header a.logo {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+main {
+    padding: 170px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.cart {
+    margin-bottom: 600px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+.cart-item .details {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.cart-item .details p {
+    margin: 5px 0;
+}
+
+.summary {
+    text-align: right;
+}
+
+.summary p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.checkout {
+    padding: 10px 20px;
+    background: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.checkout:hover {
+    background: #555;
+}
+
+
+footer {
+    text-align: center;
+    background: #2c2c2c;
+    color: #fff;
+    padding: 20px;
+}
+
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .cart-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cart-item .details {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .summary {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .summary p {
+        font-size: 16px;
+    }
+
+    .checkout {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: center;
+        padding: 8px;
+    }
+
+    .cart-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .cart-item .details {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .summary p {
+        font-size: 14px;
+    }
+
+    .checkout {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
